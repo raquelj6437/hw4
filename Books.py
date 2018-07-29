@@ -4,9 +4,8 @@ from List import List
 class Books():
     numMade = 0
 
-    def __init__(self, data=None, title=None, author=None, subject=None, edition=None, annotations=None, location=None):
+    def __init__(self, data=None, author=None, subject=None, edition=None, annotations=None, location=None):
         self.data = data
-        self.title = title
         self.author = author
         self.subject = subject
         self.edition = edition
@@ -15,9 +14,8 @@ class Books():
         self.ID = Books.numMade
         Books.numMade += 1
 
-        self.available = []
-        self.loaned = []
-        self.title = []
+        self.available = List('available')
+        self.loaned = List('loaned')
 
     def __str__(self):
         return str(self.data)
@@ -27,10 +25,6 @@ class Books():
     def setData(self, data): self.data = data
 
     def getData(self): return self.data
-
-    def setTitle(self, title): self.title = title
-
-    def getTitle(self): return self.data
 
     def setAuthor(self, author): self.author = author
 
@@ -57,8 +51,6 @@ class Books():
     def getLoanedBooks(self): return self.loaned
 
     def getBooks(self): return self.bookList
-
-    def hasTitle(self): return self.title != None
 
     def hasAuthor(self): return self.author != None
 

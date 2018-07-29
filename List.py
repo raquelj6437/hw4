@@ -8,7 +8,7 @@ class List:
         self.back = None
         self.front = None
         self.name = name
-        self.root = node()  # creates an empty node ab initio
+        self.root = ''  # creates an empty node ab initio
         self.allNodes = []  # a temporary fudge to hold all the tree's nodes
 
     def print_back(self):
@@ -16,6 +16,20 @@ class List:
 
     def print_front(self):
         print(str(self.getFront()))
+
+    def startFind(self, thing):
+        ''' returns BSTnode if found, else returns None -- this is the helper function '''
+        if self.isEmpty():
+            return None
+        else:
+            return self.find(thing, self.data)
+
+    def find(self, thing, node):
+        ''' this is the recursive function '''
+        print('working')
+        if node.get_data() == thing:
+            print("found it")
+            return node
 
     def showTree(self):
         if self.isEmpty():
@@ -43,7 +57,7 @@ class List:
             self.front = data
             self.back = self.front
             self.size += 1
-            self.allNodes.append(data)
+            self.allNodes.append(self.data)
         else:
             # create a node with data in it and call it 'temp'
             temp = node(data)
@@ -53,7 +67,7 @@ class List:
             self.front.set_next(temp)
             self.front = temp  # updating the back to temp
             self.size += 1
-            self.allNodes.append(data)
+            self.allNodes.append(self.data)
 
     def prepend(self, data):
         '''puts data at the end of a list'''
@@ -95,27 +109,6 @@ class List:
             node.getPrev().setNext(node.getNext())
             node.getNext().setPrev(node.getPrev())
             self.size -= 1
-
-    def find(self, data):  # this is the helper function
-        if self.isEmpty():  # if the list is empty, nothing can be found
-            return None
-        else:
-            node.getPrev().setNext(node.getNext())
-            node.getNext().setPrev(node.getPrev())
-            self.size -= 1
-
-    def recFind(self, data, node):
-        '''this is a recursive function going through a list searching
-        for data being requested and returns the node that holds that data'''
-        if node.getData == data:  # seeing if the data being searched is in that node
-            return node
-        else:
-            if node.getNext != None:  # if there is a node after the current node in the list
-                return self.recFind(data, node.getNext())
-                # returning to the beginning of the function until the data is found
-            else:  # if the current node doesn't have a next then this is the end of the list
-                # and the data wasn't found
-                return None
 
     # def mergeSort(self, L1, L2):
     #     pointL1 = L1.getFront()
