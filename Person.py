@@ -1,23 +1,28 @@
+from List import List
+
+
 class Person():
     numMade = 0
 
-    def __init__(self, name=None, gender=None, age=None):
-        self.name = name
+    def __init__(self, data=None, gender=None, age=None):
+        self.data = data
         self.gender = gender
         self.age = age
-        self.friends = ''
+        self.friends = List('friends')
         # current collection of books owned
         self.books_collections = ''
-        self.books_cart = ''
-        self.wish_list = ''
+        self.books_cart = List('books_cart')
         self.currentState = ""
         Person.numMade = Person.numMade + 1
+
+    def __str__(self):
+        return str(self.data)
 
     def getID(self): return self.ID
 
     def setName(self, name): self.name = name
 
-    def getName(self): return self.name
+    def getData(self): return self.data
 
     def setAge(self, age): self.age = age
 
@@ -28,8 +33,6 @@ class Person():
     def getBooks_Collections(self): return self.books_collections
 
     def getBooks_Cart(self): return self.books_cart
-
-    def getWishList(self): return self.wish_list
 
     def expressState(self):
         self.currentState = " "  # ensures that the current state is reset before updating

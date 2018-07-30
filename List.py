@@ -8,8 +8,6 @@ class List:
         self.back = None
         self.front = None
         self.name = name
-        self.root = ''  # creates an empty node ab initio
-        self.allNodes = []  # a temporary fudge to hold all the tree's nodes
 
     def print_back(self):
         print(str(self.getBack()))
@@ -22,25 +20,52 @@ class List:
         if self.isEmpty():
             return None
         else:
-            return self.find(thing, self.data)
+            return self.find(thing, self.front)
 
     def find(self, thing, node):
         ''' this is the recursive function '''
-        print('working')
-        if node.get_data() == thing:
-            print("found it")
+        while node.get_next() is not None:
+            if node.get_data().getData() == thing:
+                return node
+            else:
+                return self.find(thing, node.get_next())
+        if node.get_data().getData() == thing:
             return node
-
-    def showTree(self):
-        if self.isEmpty():
-            return "Sorry, this tree is empty"
         else:
-            tempInfo = "My tree has:"
-            for node in self.allNodes:
-                print(node)
-            return str(self.allNodes)
+            return False
+
+    def remove(self, thing):
+        '''Removes item from list'''
+        if self.isEmpty() is True:
+            return None
+        else:
+            N = self.startFind(thing)
+            if self.size == 1:
+                self.front = None
+                self.back = None
+                self.size -= 1
+            elif N.get_next() is None:
+                N.get_prev().set_next(None)
+                self.setBack(N.getPrev())
+                N.prev(None)
+                self.size -= 1
+            elif N.get_prev() is None:
+                N.get_next().set_prev(None)
+                self.setFront(N.get_next())
+                N.next = None
+                self.size -= 1
+            else:
+                N.get_next().set_prev(N.get_prev())
+                N.get_prev().set_next(N.get_next())
+                N.set_next(None)
+                N.set_prev(None)
+                self.size -= 1
+
+    def setFront(self, front): self.front = front
 
     def getFront(self): return self.front
+
+    def setBack(self, front): self.back = back
 
     def getBack(self): return self.back
 
@@ -54,20 +79,18 @@ class List:
     def append(self, data):
         ''' puts data at the end of a list'''
         if self.isEmpty():
-            self.front = data
+            self.front = node(data)
             self.back = self.front
             self.size += 1
-            self.allNodes.append(self.data)
         else:
             # create a node with data in it and call it 'temp'
             temp = node(data)
-            temp.set_prev(self.back)
+            temp.set_prev(self.front)
             # the new node's (temp) prev becomes the last element in the list
             # the back node's next becomes the newly created node
-            self.front.set_next(temp)
-            self.front = temp  # updating the back to temp
+            self.back.set_next(temp)
+            self.back = temp  # updating the back to temp
             self.size += 1
-            self.allNodes.append(self.data)
 
     def prepend(self, data):
         '''puts data at the end of a list'''
@@ -76,7 +99,7 @@ class List:
         else:
             # create a node with data in it and call it 'temp'
             temp = node(data)
-            temp.setNext(self.front)
+            temp.setNext(self.back)
             # the new node's (temp) next becomes the first element in the list
             # teh front node's prev becomes the newly created node
             self.front.setPrev(temp)

@@ -15,7 +15,6 @@ class Books():
         Books.numMade += 1
 
         self.available = List('available')
-        self.loaned = List('loaned')
 
     def __str__(self):
         return str(self.data)

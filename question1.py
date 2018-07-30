@@ -3,27 +3,29 @@ from Books import Books
 from List import List
 from Node import node
 
-p = Person()
 b = Books()
 
-red = Books('hi', 'jonny', 'color', '3', 'yes')
+red = Books('hi')
 orange = Books('bye')
 purple = Books('purple')
 green = Books('green')
 
-red_node = node(red)
-orange_node = node(orange)
-purple_node = node(purple)
-green_node = node(green)
+b.available.append(red)
+b.available.append(orange)
+b.available.append(purple)
+b.available.append(green)
 
-b.available.append(red_node)
-b.available.append(orange_node)
-b.available.append(purple_node)
-b.available.append(green_node)
+doug = Person('Douglas')
+jerry = Person('Joseph')
+ralph = Person('Ralphy')
 
-print(str(b.available.showTree()))
-print(str(b.loaned.showTree()))
-print(red_node.data)
-# b.available.print_back()
+doug.friends.append(jerry)
+doug.friends.append(ralph)
 
-# print(b.available.startFind('hi'))
+jerry.books_cart.append(red)
+b.available.remove('hi')
+
+doug.books_cart.append(red)
+
+jerry.books_cart.print_front()
+doug.books_cart.print_front()
