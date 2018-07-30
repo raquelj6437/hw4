@@ -22,10 +22,11 @@ ralph = Person('Ralphy')
 doug.friends.append(jerry)
 doug.friends.append(ralph)
 
-jerry.books_cart.append(red)
+jerry.books_cart.appendBook('hi', b.available)
+# print(b.available.startFind('hi'))
 b.available.remove('hi')
 
-doug.books_cart.append(red)
+doug.books_cart.appendBook('hi', b.available)
 
-jerry.books_cart.print_front()
-doug.books_cart.print_front()
+# jerry.books_cart.print_front()
+# doug.books_cart.print_front()

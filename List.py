@@ -92,6 +92,30 @@ class List:
             self.back = temp  # updating the back to temp
             self.size += 1
 
+    def appendBook(self, data, list):
+        ''' puts data at the end of a list'''
+        if self.isEmpty():
+            f = list.startFind(data)
+            if str(f) == str(data):
+                self.front = node(data)
+                self.back = self.front
+                self.size += 1
+            else:
+                return
+        else:
+            f = list.startFind(data)
+            if str(f) == str(data):
+                # create a node with data in it and call it 'temp'
+                temp = node(data)
+                temp.set_prev(self.front)
+                # the new node's (temp) prev becomes the last element in the list
+                # the back node's next becomes the newly created node
+                self.back.set_next(temp)
+                self.back = temp  # updating the back to temp
+                self.size += 1
+            else:
+                return
+
     def prepend(self, data):
         '''puts data at the end of a list'''
         if self.isEmpty():
